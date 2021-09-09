@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<style>
+
+.wordCont {
+	
+background-color: lightblue;
+height: 120px;
+width: 120px;
+/*text-align: center; only for text inside, centers horizontally*/
+/*line-height: 120px; /*only for text inside, centers vertically*/
+font-size: 20px;
+}
+
+.visible{
+  font-size: 30px;
+}
+
+.invisible{
+display: none;
+
+}
+
+.span {
+	display: block;
+}
+
+table{
+		
+border: 1px solid black;
+
+width: auto;
+/*table-layout: auto;*/
+
+}
+
+td,th {
+height:120px;
+width:120px; 
+border: 1px solid black;
+text-align:center;
+vertical-align: middle;
+
+
+
+}
+
+tr{
+
+border: 1px solid black;
+/*text-align:center;*/
+
+}
+</style>
+
+<body>
+	<h1> Hiragana Table</h1>
+	<h2>Click any symbol to learn its pronunciation</h2>
+	<table id = "hirstudyTable">
+  
+  <tbody>
+    
+  </tbody>
+</table>
+
+<br>
+<br>
+
+<h1> Random Hiragana Table</h1>
+<h2>Click any hiragana symbol to review its pronunciation. Attention: this table shows hiragana symbols in random order</h2>
+	<table id = "hirTable">
+  
+  <tbody>
+    
+  </tbody>
+</table>
+
+</body>
+
+<script type="text/javascript">
+
+	arrHir = [];
+	arrPrn=[];
+
+	a ={
+
+		hir: "あ",
+		prn: "a"
+	};
+
+	i = {
+
+		hir:"い",
+		prn:"i"
+	};
+
+	u = {
+		hir:"う",
+		prn:"u"
+	};
+
+
+	e = {
+		hir:"え",
+		prn:"e"
+	};
+
+	o = {
+		hir:"お",
+		prn:"o"
+	};
+
+	ka = {
+		hir:"か",
+		prn:"ka"
+	};
+
+	ki = {
+		hir:"き",
+		prn:"ki"
+	};
+
+	ku = {
+		hir:"く",
+		prn:"ku"
+	};
+
+	ke = {
+		hir:"け",
+		prn:"ke"
+	};
+
+	ko = {
+		hir:"こ",
+		prn:"ko"
+	};
+
+	sa = {
+		hir:"さ",
+		prn:"sa"
+	};
+
+	shi = {
+		hir:"し",
+		prn:"shi"
+	};
+
+	su = {
+		hir:"す",
+		prn:"su"
+	};
+
+	su = {
+		hir:"す",
+		prn:"su"
+	};
+
+	se = {
+		hir:"せ",
+		prn:"se"
+	};
+
+	so = {
+		hir:"そ",
+		prn:"so"
+	};
+
+
+	ta = {
+		hir:"た",
+		prn:"ta"
+	};
+
+
+	chi = {
+		hir:"ち",
+		prn:"chi"
+	};
+
+	tsu = {
+		hir:"つ",
+		prn:"tsu"
+	};
+	
+	te = {
+		hir:"て",
+		prn:"te"
+	};
+
+
+	to = {
+		hir:"と",
+		prn:"to"
+	};
+
+
+	const arr=[a, i, u, e, o, ka, ki, ku, ke,
+	ko, sa, shi, su, se, so, ta, chi, tsu, te, to];
+
+
+function splitPair(pair){
+for (i=0; i<arr.length; i++){
+  var pair=arr[i];
+  console.log(pair);
+  hiragana=pair.hir;
+  pronunciation = pair.prn;
+  arrHir.push(hiragana);
+  arrPrn.push(pronunciation);
+  
+    }
+}
+splitPair();
+
+
+
+	let table= document.getElementById("hirstudyTable");
+
+	let cellNumber=arr.length/4
+	var row = table.insertRow();
+	
+	for (i=0; i<arr.length; i++){
+
+				
+		var cell = row.insertCell();
+		
+
+		let wordContainer=document.createElement('DIV');
+		wordContainer.className="wordCont";
+		let hirDiv=document.createElement("DIV");
+		
+		hirInside=document.createTextNode(arrHir[i]);
+		
+		console.log(wordContainer.id)
+		hirDiv.appendChild(hirInside);
+		let prnDiv=document.createElement("DIV");
+		prnInside = document.createTextNode(arrPrn[i]);
+		console.log(prnInside)
+		prnDiv.appendChild(prnInside);
+	
+
+		prnDiv.className="invisible";
+		wordContainer.appendChild(hirDiv)
+		wordContainer.appendChild(prnDiv);
+		wordContainer.addEventListener("click", changeVisibility)
+
+	function changeVisibility(){
+	
+
+ 	if (prnDiv.className="invisible"){
+ 		prnDiv.className="visible"
+ 	}else{
+ 		prnDiv.className="invisible"};
+
+ };
+ 		cell.appendChild(wordContainer);
+
+		var nextRow=i+1;
+		if (nextRow%cellNumber==0 && nextRow!=arr.length){
+			row=table.insertRow();
+		};
+	
+};
+
+
+
+arrHirTwo =[];
+arrPrnTwo=[];
+mixedArray=[];
+
+
+
+Array.prototype.shuffle = function() {
+  let input = this;
+  
+  for (let t = input.length-1; t>= 0; t--) {
+  
+    let randomIndex = Math.floor(Math.random() * (t + 1)); 
+    let itemAtIndex = input[randomIndex]; 
+    input[randomIndex] = input[t]; 
+    input[t] = itemAtIndex;
+  };
+  return input;
+} ;
+
+mixedArray=arr.shuffle();
+console.log(mixedArray);
+
+
+function splitPairTwo(pair){
+for (i=0; i<mixedArray.length; i++){
+  var pair=mixedArray[i];
+  hir=pair.hir;
+   pronun = pair.prn;
+  arrHirTwo.push(hir);
+  arrPrnTwo.push(pronun);
+  
+    }
+}
+splitPairTwo();
+
+console.log(arrHirTwo);
+console.log(arrPrnTwo);
+
+	let tableTrain= document.getElementById("hirTable");
+
+	let cellNumberTwo=mixedArray.length/4
+	var rowTwo = tableTrain.insertRow();
+	
+	for (i=0; i<mixedArray.length; i++){
+		var cellTwo = rowTwo.insertCell();
+		
+
+		let wordContainerTwo=document.createElement('DIV');
+		wordContainerTwo.className="wordCont";
+		let hirDivTwo=document.createElement("DIV");
+		
+		hirInsideTwo=document.createTextNode(arrHirTwo[i]);
+		
+		
+		hirDivTwo.appendChild(hirInsideTwo);
+		let prnDivTwo=document.createElement("DIV");
+		prnInsideTwo= document.createTextNode(arrPrnTwo[i]);
+		console.log(prnInsideTwo)
+		prnDivTwo.appendChild(prnInsideTwo);
+	
+
+		prnDivTwo.className="invisible";
+		wordContainerTwo.appendChild(hirDivTwo)
+		wordContainerTwo.appendChild(prnDivTwo);
+		wordContainerTwo.addEventListener("click", changeVisibilityTwo)
+
+	function changeVisibilityTwo(){
+	
+
+ 	if (prnDivTwo.className="invisible"){
+ 		prnDivTwo.className="visible"
+ 		wordContainerTwo.removeEventListener("click", changeVisibilityTwo)
+ 		wordContainerTwo.addEventListener("click", changeAgain);
+
+ 		function changeAgain() {
+ 			if (prnDivTwo.className="visible"){
+			prnDivTwo.className="invisible"
+			wordContainerTwo.removeEventListener("click", changeAgain);
+			wordContainerTwo.addEventListener("click", changeVisibilityTwo)
+		};
+ 		};
+
+ };
+};
+ 		cellTwo.appendChild(wordContainerTwo);
+
+		var nextRowTwo=i+1;
+		if (nextRowTwo%cellNumberTwo==0 && nextRowTwo!=mixedArray.length){
+			rowTwo=tableTrain.insertRow();
+		};
+	
+};
+
+
+	</script>
+</html>
+
